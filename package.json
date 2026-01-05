@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "playwright": "^1.57.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.2"
+  },
+  "scripts": {
+    "showreport": "npx playwright show-report",
+    "test": "npx playwright test",
+    "Login": "npx playwright test tests/Login.spec.ts",
+    "Loginwithparamter":" npx playwright test tests/paramterisedwitharray.spec.ts",
+    "Productlisting":" npx playwright test tests/Product_listing.spec.ts",
+    "cartfunctionality":" npx playwright test tests/Cartmodule.spec.ts",
+    "Logout":"npx playwright test tests/Logoutandsession.spec.ts"
+  }
+}
