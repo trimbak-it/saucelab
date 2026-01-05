@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '../Pages/LoginPage';
 
-test('Login successfull', async ({ page }) => {
+test('@E2E Login successfull', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.gotoLoginPage();
   await loginPage.Login('standard_user', 'secret_sauce');
