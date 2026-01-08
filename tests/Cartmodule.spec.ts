@@ -1,7 +1,7 @@
 import { test,expect  } from "@playwright/test";
 import { CartmodulePage } from "../Pages/CartmodulePage";
 import{ProductListingPage} from "../Pages/Product_listing"
-test('Verify cartbadge and removebutton',async({page})=>{
+test('@Sanity Verify cartbadge and removebutton',async({page})=>{
     const Cartmodule=new CartmodulePage(page)
     await Cartmodule.gotoLoginPage();
     await Cartmodule.Login("standard_user","secret_sauce")
@@ -51,7 +51,7 @@ test('remove one  itemfrom cart  and verify cartbadge count',async({page})=>{
 })
 
 
-test('Cart persistence during navigation',async({page})=>{
+test('@ Sanity Cart persistence during navigation',async({page})=>{
     const Cartmodule=new CartmodulePage(page)
     const prodctlist=new ProductListingPage(page)
     await Cartmodule.gotoLoginPage();
