@@ -7,7 +7,7 @@
     "@types/node": "^24.10.2"
   },
   "scripts": {
-    "Sanity":"npx playwright test --grep '@Sanity' ",
+    "Sanity":"npx playwright test --grep 'Sanity'",
     "showreport": "npx playwright show-report",
     "test": "npx playwright test",
     "Login": "npx playwright test tests/Login.spec.ts",
