@@ -33,7 +33,7 @@ test('Cancel from checkout overview',async({page})=>{
     await checkout.verifyUrlContains('/cart.html')
 })
 
-test('Checkout with valid customer info',async ({page})=>{
+test('@Sanity Checkout with valid customer info',async ({page})=>{
     const checkout=new Checkoutpage(page)
     const productpage= new ProductListingPage(page)
     await checkout.gotoLoginPage()
