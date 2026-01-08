@@ -8,7 +8,7 @@ test('@E2E Login successfull', async ({ page }) => {
   // Add assertions here to verify the error message is displayed 
   await loginPage.verifyLoginPageTitle();
   await loginPage.verifyUrlContains('/inventory.html')
-  await loginPage.verifyItemsInInventory(0);
+  await loginPage.verifyItemsInInventory(0) ;
 
 });
 
