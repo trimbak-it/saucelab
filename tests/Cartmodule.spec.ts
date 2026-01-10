@@ -1,20 +1,27 @@
-import { test,expect  } from "@playwright/test";
+import { test,expect, Page  } from "@playwright/test";
 import { CartmodulePage } from "../Pages/CartmodulePage";
 import{ProductListingPage} from "../Pages/Product_listing"
-test('@Sanity Verify cartbadge and removebutton',async({page})=>{
-    const Cartmodule=new CartmodulePage(page)
+let page:Page
+let Cartmodule:CartmodulePage
+let prodctlist:ProductListingPage
+
+test.beforeAll(async({browser})=>{
+    page=await browser.newPage()
+    Cartmodule=new CartmodulePage(page)
     await Cartmodule.gotoLoginPage();
+    prodctlist=new ProductListingPage(page)
     await Cartmodule.Login("standard_user","secret_sauce")
+
+
+})
+
+test('@Sanity Verify cartbadge and removebutton',async({})=>{    
     await Cartmodule.clickbutton( Cartmodule.addtocartbutton.first())
     await expect(Cartmodule.removecartbutton).toBeEnabled({enabled:true})
     await expect(Cartmodule.shoppingcartbadge).toHaveText("1")
 })
 
-test('Add multiple items and verify cart contents',async({page})=>{
-    const Cartmodule=new CartmodulePage(page)
-    const prodctlist=new ProductListingPage(page)
-    await Cartmodule.gotoLoginPage();
-    await Cartmodule.Login("standard_user","secret_sauce")
+test('Add multiple items and verify cart contents',async({})=>{   
     let itemnum=3
     let inventproductdetails:{selecteditemname:string[],selecteditemimage:(string|null)[],selecteditemprice:string[],itemdescription:string[]}|undefined=await prodctlist.getproductdetaills(itemnum);
     await Cartmodule.addmultipleitem(undefined,inventproductdetails?.selecteditemname)
@@ -34,11 +41,7 @@ test('Add multiple items and verify cart contents',async({page})=>{
 
 })
 
-test('remove one  itemfrom cart  and verify cartbadge count',async({page})=>{
-    const Cartmodule=new CartmodulePage(page)
-    const prodctlist=new ProductListingPage(page)
-    await Cartmodule.gotoLoginPage();
-    await Cartmodule.Login("standard_user","secret_sauce")
+test('remove one  itemfrom cart  and verify cartbadge count',async({})=>{
     let itemnum=2
     await Cartmodule.addmultipleitem(itemnum)
     await Cartmodule.clickbutton(Cartmodule.shoppingcartlink)
@@ -51,11 +54,7 @@ test('remove one  itemfrom cart  and verify cartbadge count',async({page})=>{
 })
 
 
-test('@ Sanity Cart persistence during navigation',async({page})=>{
-    const Cartmodule=new CartmodulePage(page)
-    const prodctlist=new ProductListingPage(page)
-    await Cartmodule.gotoLoginPage();
-    await Cartmodule.Login("standard_user","secret_sauce")
+test('@ Sanity Cart persistence during navigation',async({})=>{
     let itemnum=2
     await Cartmodule.addmultipleitem(itemnum)
     await Cartmodule.clickbutton(Cartmodule.shoppingcartlink)
@@ -71,6 +70,4 @@ test('@ Sanity Cart persistence during navigation',async({page})=>{
     else{
         test.fail()
     }
-    
-
 })

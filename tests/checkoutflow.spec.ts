@@ -1,11 +1,22 @@
-import {test,expect} from '@playwright/test'
+import {test,expect, Page} from '@playwright/test'
 import { Checkoutpage } from '../Pages/checkoutpage'
 import {ProductListingPage} from '../Pages/Product_listing'
 
-test('Checkout with missing mandatory field',async({page})=>{
-    const checkout=new Checkoutpage(page)
+let checkout:Checkoutpage;
+let productpage:ProductListingPage;
+let page:Page
+
+
+test.beforeAll(async({browser})=>{
+    page=await browser.newPage()
+    checkout = new Checkoutpage(page);
     await checkout.gotoLoginPage();
+    productpage= new ProductListingPage(page)
     await checkout.Login('standard_user','secret_sauce')
+})
+
+test('Checkout with missing mandatory field',async({})=>{
+    
     await checkout.clickbutton(checkout.addtocartbutton.first())
     await checkout.clickbutton(checkout.shoppingcartlink)
     await checkout.clickbutton(checkout.checkoutbutton)
@@ -19,10 +30,7 @@ test('Checkout with missing mandatory field',async({page})=>{
     await checkout.verifyErrorMessage(Checkoutpage.ziperrormessage)
 })
 
-test('Cancel from checkout overview',async({page})=>{
-    const checkout=new Checkoutpage(page)
-    await checkout.gotoLoginPage()
-    await checkout.Login('standard_user','secret_sauce')
+test('Cancel from checkout overview',async({})=>{
     await checkout.clickbutton(checkout.addtocartbutton.first())
     await checkout.clickbutton(checkout.shoppingcartlink)
     await checkout.clickbutton(checkout.checkoutbutton)
@@ -30,14 +38,10 @@ test('Cancel from checkout overview',async({page})=>{
     let overviewtitle=await checkout.gettext(page.locator("//*[@data-test='title']"))
     expect(overviewtitle,'Procees Not nevigate on final checkoput page ').toStrictEqual(Checkoutpage.checkouttitle)
     await checkout.clickbutton(checkout.gobackcancelbutton)
-    await checkout.verifyUrlContains('/cart.html')
+    await checkout.verifyUrlContains('/inventory.html')
 })
 
-test('@Sanity Checkout with valid customer info',async ({page})=>{
-    const checkout=new Checkoutpage(page)
-    const productpage= new ProductListingPage(page)
-    await checkout.gotoLoginPage()
-    await checkout.Login('standard_user','secret_sauce')
+test('@Sanity Checkout with valid customer info',async ({})=>{
     let itemnum=2
     let productdetail:{selecteditemname:string[],selecteditemimage:(string|null)[],selecteditemprice:string[],itemdescription:string[]}|undefined=await productpage.getproductdetaills(itemnum,true)//await Cartmodule.cartlist.count())
     if(productdetail){
