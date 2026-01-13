@@ -1,0 +1,47 @@
+[
+    {
+      "username": "standard_user",
+      "password": "secret_sauce",
+      "expectedMessage": "",
+      "urlcur": "/inventory.html",
+      "isnocontains": false,
+      "isitem": true
+    },
+    {
+      "username": "standard_user",
+      "password": "invalid_password",
+      "expectedMessage": "Epic sadface: Username and password do not match any user in this service",
+      "urlcur": "/inventory.html",
+      "isnocontains": true
+    },
+    {
+      "username": "locked_out_user",
+      "password": "secret_sauce",
+      "expectedMessage": "Epic sadface: Sorry, this user has been locked out.",
+      "urlcur": "/inventory.html",
+      "isnocontains": true
+    },
+    {
+      "username": "",
+      "password": "",
+      "expectedMessage": "Epic sadface: Username is required",
+      "urlcur": "/inventory.html",
+      "isnocontains": true
+    },
+    {
+      "username": "problem_user",
+      "password": "secret_sauce",
+      "expectedMessage": "",
+      "urlcur": "/inventory.html",
+      "isnocontains": false,
+      "isitem": true
+    },
+    {
+      "username": "performance_glitch_user",
+      "password": "secret_sauce",
+      "expectedMessage": "",
+      "urlcur": "/inventory.html",
+      "isnocontains": false,
+      "isitem": true
+    }
+  ]

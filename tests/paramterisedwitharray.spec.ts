@@ -1,6 +1,5 @@
 import { test,Page,expect } from "@playwright/test";
 import { LoginPage } from "../Pages/LoginPage";
-import { url } from "inspector";
 
 const Logindata = [
     {username: 'standard_user', password: 'secret_sauce', expectedMessage: '',urlcur:'/inventory.html',isnocontains:false,isitem:true},
@@ -11,7 +10,8 @@ const Logindata = [
     {username: 'performance_glitch_user', password: 'secret_sauce', expectedMessage: '',urlcur:'/inventory.html',isnocontains:false,isitem:true},
     
 ];
-Logindata.forEach(data => {
+
+Logindata.forEach((data) => {
     test(`Login test with username: ${data.username} and password: ${data.password}`, async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.gotoLoginPage();
@@ -26,3 +26,4 @@ Logindata.forEach(data => {
         }
     });
 });
+
