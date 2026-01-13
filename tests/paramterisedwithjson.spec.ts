@@ -6,7 +6,7 @@ import { url } from "inspector";
 let jsonpath="Testdata/LoginData.json"
 let Logindata:any[]=JSON.parse(fs.readFileSync(jsonpath,'utf-8')) 
 
-Logindata.forEach((data) => {
+Object.entries(Logindata).forEach(([testname,data]) => {
     test(`Login test with username: ${data.username} and password: ${data.password}`, async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.gotoLoginPage();
